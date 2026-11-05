@@ -76,7 +76,7 @@ h3{font-size:22px;line-height:1.25}
 .nav-toggle[aria-expanded="true"] .nav-toggle-open{display:none}
 .nav-toggle[aria-expanded="false"] .nav-toggle-close,.nav-toggle:not([aria-expanded="true"]) .nav-toggle-close{display:none}
 .nav-toggle[aria-expanded="true"] .nav-toggle-close{display:block}
-.hero{position:relative;padding:120px 0 90px;background:linear-gradient(175deg,rgba(10,42,47,.86) 0%,rgba(6,30,34,.93) 45%,rgba(3,10,11,.98) 100%),url('img/hero-allee-bg.jpg') center 40%/cover}
+.hero{position:relative;padding:72px 0 90px;background:linear-gradient(175deg,rgba(10,42,47,.86) 0%,rgba(6,30,34,.93) 45%,rgba(3,10,11,.98) 100%),url('img/hero-allee-bg.jpg') center 40%/cover}
 .hero .narrow{display:flex;flex-direction:column;align-items:center;gap:26px}
 .hero h1{max-width:820px}.hero h1 .hl{color:var(--lime);font-style:italic}
 .hero-after{margin-top:40px}
@@ -115,6 +115,7 @@ h3{font-size:22px;line-height:1.25}
 .photos figure{margin:0}
 .photos img{width:100%;aspect-ratio:4/5;object-fit:cover;border-radius:8px}
 .photos figcaption{font-size:12px;color:var(--muted);margin-top:8px}
+.photos-nav{display:none}
 .quotes{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:28px;margin-top:70px;padding-top:44px;border-top:1px solid rgba(10,42,47,.1)}
 .quotes p{margin:0 0 12px;font-family:'Newsreader',serif;font-size:19px;line-height:1.45;color:var(--text)}
 .quotes small{font-size:12px;color:var(--muted)}
@@ -242,7 +243,7 @@ h1{font-size:40px}h2{font-size:32px}
 @media (max-width:600px){
 .wrap{padding:0 20px}
 h1{font-size:34px}h2{font-size:28px}
-.hero{padding:96px 0 48px}
+.hero{padding:32px 0 48px}
 .hero .narrow{gap:20px}
 .hero h1{font-size:31px;line-height:1.15}
 .hero .badge{font-size:10px;letter-spacing:1.6px}
@@ -382,8 +383,17 @@ section[data-bg]::before{content:"";position:absolute;inset:0;z-index:-1;backgro
 @media (max-width:700px){.fy h2{margin:18px 0 26px}.fy-yes{font-size:15.5px;line-height:1.7}.fy-no{font-size:19px;margin-top:24px}.fy-sel{font-size:16.5px;margin:24px 0 20px;padding:10px 14px}.fy .btn{width:100%;justify-content:center}.flow{margin-top:52px}}
 @media (max-width:600px){
 .hero .checks{display:none}
-.photos{display:flex!important;overflow-x:auto;scroll-snap-type:x mandatory;gap:10px;margin:0 -20px;padding:0 20px 6px;grid-template-columns:none!important}
-.photos figure{flex:0 0 56%;scroll-snap-align:start;margin:0}
+.photos{display:flex!important;overflow-x:auto;scroll-snap-type:x mandatory;scroll-padding-inline:20px;gap:12px;margin:0 -20px;padding:0 20px 6px;grid-template-columns:none!important;scrollbar-width:none;-webkit-overflow-scrolling:touch}
+.photos::-webkit-scrollbar{display:none}
+.photos figure{flex:0 0 78%;scroll-snap-align:start;margin:0}
+.photos figure:last-child{margin-right:20px}
+.photos-nav{display:flex!important;align-items:center;justify-content:space-between;margin-top:14px}
+.photos-dots{display:flex;gap:6px}
+.photos-dots i{width:6px;height:6px;border-radius:99px;background:rgba(10,42,47,.2);transition:all .25s}
+.photos-dots i.on{width:18px;background:var(--teal)}
+.photos-hint{font-size:11px;font-weight:600;letter-spacing:1.5px;text-transform:uppercase;color:var(--muted);display:flex;align-items:center;gap:6px;transition:opacity .3s}
+.photos-hint span{display:inline-block;animation:swipeHint 1.6s ease-in-out infinite}
+@keyframes swipeHint{0%,100%{transform:translateX(0)}50%{transform:translateX(5px)}}
 .photos img{aspect-ratio:1/1;height:auto!important}
 .doors{padding-bottom:52px}
 section{padding:60px 0}
@@ -512,7 +522,7 @@ section{padding:60px 0}
 <div class="wrap">
 <div class="split">
 <div>
-<span class="label label--light">Qui sommes-nous</span>
+<span class="label label--light" style="display:flex;width:fit-content;margin:0 auto">Qui sommes-nous</span>
 <h2 style="margin:22px 0 20px">Nous l'avons fait pour nous avant de le faire pour vous.</h2>
 <p class="lead" style="margin:0 0 26px">Depuis 2024, nous accompagnons des porteurs de projet partout en France. En 2026, nous avons ouvert notre propre club&nbsp;: Padel Signature, à Montauban. Chaque étape que nous vous proposons, nous l'avons vécue.</p>
 <div class="founders"><img src="img/equipe.jpg" alt="Clément et Hugo, fondateurs de PadelProgram, devant le club Padel Signature" style="width:100%;aspect-ratio:1/1;object-fit:cover;object-position:50% 45%;border-radius:10px"><div><b>Clément Rouanet &amp; Hugo Briand</b><small>Fondateurs de PadelProgram et de Padel Signature</small><a class="btn-line btn-line--dark" href="https://www.padelsignature.fr" target="_blank" rel="noopener">Découvrir Padel Signature&nbsp;↗</a></div></div>
@@ -523,6 +533,7 @@ section{padding:60px 0}
 <figure><img src="img/seminaire.jpg" alt="Séminaire d'entreprise à Padel Signature" style="object-position:50% 40%"><figcaption>Les séminaires</figcaption></figure>
 <figure><img src="img/ps-accesautonome.jpg" alt="Entrée en accès autonome de Padel Signature" style="object-position:50% 40%"><figcaption>L'accès autonome 24h/24</figcaption></figure>
 </div>
+<div class="photos-nav" aria-hidden="true"><div class="photos-dots"><i class="on"></i><i></i><i></i><i></i></div><div class="photos-hint">Glissez <span>→</span></div></div>
 </div>
 <div class="press press--light">
 <div class="press-k">Notre club dans la presse</div>
@@ -694,5 +705,9 @@ else location.hash=id;
 });
 });
 })();</script>
+<script>
+(function(){var g=document.querySelector('.photos'),n=document.querySelector('.photos-nav');if(!g||!n)return;var d=n.querySelectorAll('.photos-dots i'),f=g.querySelectorAll('figure'),h=n.querySelector('.photos-hint');
+g.addEventListener('scroll',function(){var w=f[0].offsetWidth+12,i=Math.min(f.length-1,Math.round(g.scrollLeft/w));if(g.scrollLeft+g.clientWidth>=g.scrollWidth-4)i=f.length-1;d.forEach(function(x,k){x.classList.toggle('on',k===i)});if(h&&g.scrollLeft>10)h.style.opacity='0'},{passive:true});})();
+</script>
 </body>
 </html>
